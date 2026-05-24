@@ -1,39 +1,50 @@
-import { initializeApp }
-from "firebase/app";
+import {
+  initializeApp,
+} from "firebase/app";
 
-import { getFirestore }
-from "firebase/firestore";
+import {
+  getAuth,
+} from "firebase/auth";
 
-import { getAuth }
-from "firebase/auth";
+import {
+  getFirestore,
+} from "firebase/firestore";
 
 const firebaseConfig = {
 
   apiKey:
-    "AIzaSyAazzuk51aI49gzzj5gtSy--4hfILxQ59Q",
+    process.env
+      .NEXT_PUBLIC_FIREBASE_API_KEY,
 
   authDomain:
-    "ssc-master-c49d5.firebaseapp.com",
+    process.env
+      .NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
 
   projectId:
-    "ssc-master-c49d5",
+    process.env
+      .NEXT_PUBLIC_FIREBASE_PROJECT_ID,
 
   storageBucket:
-    "ssc-master-c49d5.firebasestorage.app",
+    process.env
+      .NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
 
   messagingSenderId:
-    "152749693767",
+    process.env
+      .NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
 
   appId:
-    "1:152749693767:web:8a13bb8211cfce48294a62",
+    process.env
+      .NEXT_PUBLIC_FIREBASE_APP_ID,
 
 };
 
-export const app =
-  initializeApp(firebaseConfig);
-
-export const db =
-  getFirestore(app);
+const app =
+  initializeApp(
+    firebaseConfig
+  );
 
 export const auth =
   getAuth(app);
+
+export const db =
+  getFirestore(app);
