@@ -1,38 +1,78 @@
 "use client";
 
-import { useTheme } from "@/context/ThemeContext";
+import {
+  useTheme,
+} from "@/context/ThemeContext";
 
-const premiumTests = [
-  {
-    title: "SSC CGL Full Test 1",
-    questions: 100,
-    duration: "60 Min",
-    locked: true,
-  },
-  {
-    title: "SSC CGL Full Test 2",
-    questions: 100,
-    duration: "60 Min",
-    locked: true,
-  },
-  {
-    title: "SSC CHSL Full Test 1",
-    questions: 100,
-    duration: "60 Min",
-    locked: true,
-  },
-  {
-    title: "SSC CHSL Full Test 2",
-    questions: 100,
-    duration: "60 Min",
-    locked: true,
-  },
-];
+declare global {
+
+  interface Window {
+
+    Razorpay: any;
+
+  }
+
+}
 
 export default function PremiumPage() {
 
   const { darkMode } =
     useTheme();
+
+  function handlePayment() {
+
+    const options = {
+
+      key:
+        "rzp_live_StiH9HsM3naUQq",
+
+      amount:
+        29900,
+
+      currency:
+        "INR",
+
+      name:
+        "SSC Master",
+
+      description:
+        "Premium SSC Test Series",
+
+      image:
+        "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+
+      handler:
+        function (
+          response: any
+        ) {
+
+          alert(
+            "Payment Successful 🚀"
+          );
+
+          console.log(
+            response
+          );
+
+        },
+
+      theme: {
+
+        color:
+          "#2563eb",
+
+      },
+
+    };
+
+    const razorpay =
+      new window.Razorpay(
+        options
+      );
+
+    razorpay.open();
+
+  }
 
   return (
 
@@ -44,265 +84,109 @@ export default function PremiumPage() {
       }
     >
 
-      {/* HERO */}
-
       <section className="text-center">
 
-        <div className="inline-block bg-yellow-400 text-black px-6 py-2 rounded-full font-bold">
+        <h1 className="text-5xl md:text-7xl font-bold text-blue-700">
 
-          PREMIUM ACCESS
-
-        </div>
-
-        <h1 className="text-4xl md:text-6xl font-bold mt-6">
-
-          Unlock Full SSC Test Series
+          Premium SSC Test Series
 
         </h1>
 
         <p className="mt-6 text-xl max-w-3xl mx-auto">
 
-          Get access to premium mock tests,
-          full-length exams, detailed analytics
-          and rank prediction.
+          Unlock full-length SSC CGL & CHSL mock tests,
+          detailed analytics, rank boosters and premium practice sets.
 
         </p>
 
       </section>
 
-      {/* PRICING */}
+      <div className="max-w-4xl mx-auto mt-20">
 
-      <section className="mt-16">
+        <div
+          className={
+            darkMode
+              ? "bg-gray-900 p-10 rounded-3xl shadow-2xl border border-yellow-400"
+              : "bg-white p-10 rounded-3xl shadow-2xl border border-yellow-400"
+          }
+        >
 
-        <div className="grid md:grid-cols-3 gap-8">
+          <div className="text-center">
 
-          {/* BASIC */}
+            <div className="text-7xl">
 
-          <div
-            className={
-              darkMode
-                ? "bg-gray-900 rounded-3xl p-10 shadow-xl"
-                : "bg-white rounded-3xl p-10 shadow-xl"
-            }
-          >
-
-            <h2 className="text-3xl font-bold">
-
-              Basic
-
-            </h2>
-
-            <p className="text-5xl font-bold mt-6 text-blue-700">
-
-              ₹99
-
-            </p>
-
-            <ul className="mt-8 space-y-4 text-lg">
-
-              <li>
-                ✅ 10 Mock Tests
-              </li>
-
-              <li>
-                ✅ Basic Analytics
-              </li>
-
-              <li>
-                ✅ Rank System
-              </li>
-
-            </ul>
-
-            <button className="w-full mt-10 bg-blue-700 text-white py-4 rounded-2xl font-bold text-lg hover:scale-105 transition-all duration-300">
-
-              Buy Now
-
-            </button>
-
-          </div>
-
-          {/* PRO */}
-
-          <div className="bg-blue-700 text-white rounded-3xl p-10 shadow-2xl scale-105">
-
-            <div className="bg-yellow-400 text-black inline-block px-4 py-2 rounded-full font-bold">
-
-              MOST POPULAR
+              👑
 
             </div>
 
-            <h2 className="text-3xl font-bold mt-6">
+            <h2 className="text-4xl font-bold mt-6">
 
-              Pro
+              SSC Premium Pass
 
             </h2>
 
-            <p className="text-5xl font-bold mt-6">
+            <p className="mt-6 text-6xl font-bold text-blue-700">
 
               ₹299
 
             </p>
 
-            <ul className="mt-8 space-y-4 text-lg">
+            <p className="mt-3 text-lg">
 
-              <li>
-                ✅ Unlimited Tests
-              </li>
-
-              <li>
-                ✅ Full Analytics
-              </li>
-
-              <li>
-                ✅ All SSC Exams
-              </li>
-
-              <li>
-                ✅ Premium Support
-              </li>
-
-            </ul>
-
-            <button className="w-full mt-10 bg-yellow-400 text-black py-4 rounded-2xl font-bold text-lg hover:scale-105 transition-all duration-300">
-
-              Buy Pro
-
-            </button>
-
-          </div>
-
-          {/* ADVANCE */}
-
-          <div
-            className={
-              darkMode
-                ? "bg-gray-900 rounded-3xl p-10 shadow-xl"
-                : "bg-white rounded-3xl p-10 shadow-xl"
-            }
-          >
-
-            <h2 className="text-3xl font-bold">
-
-              Advance
-
-            </h2>
-
-            <p className="text-5xl font-bold mt-6 text-blue-700">
-
-              ₹499
+              One Time Payment
 
             </p>
 
-            <ul className="mt-8 space-y-4 text-lg">
+          </div>
 
-              <li>
-                ✅ Live Tests
-              </li>
+          <div className="grid gap-5 mt-12">
 
-              <li>
-                ✅ AI Analytics
-              </li>
+            <div className="bg-green-600 text-white p-5 rounded-2xl font-bold">
 
-              <li>
-                ✅ Mentorship
-              </li>
+              ✅ Full Mock Tests
 
-              <li>
-                ✅ Rank Booster
-              </li>
+            </div>
 
-            </ul>
+            <div className="bg-green-600 text-white p-5 rounded-2xl font-bold">
 
-            <button className="w-full mt-10 bg-blue-700 text-white py-4 rounded-2xl font-bold text-lg hover:scale-105 transition-all duration-300">
+              ✅ Premium Questions
 
-              Buy Advance
+            </div>
 
-            </button>
+            <div className="bg-green-600 text-white p-5 rounded-2xl font-bold">
+
+              ✅ Advanced Analytics
+
+            </div>
+
+            <div className="bg-green-600 text-white p-5 rounded-2xl font-bold">
+
+              ✅ Rank Prediction
+
+            </div>
+
+            <div className="bg-green-600 text-white p-5 rounded-2xl font-bold">
+
+              ✅ Unlimited Access
+
+            </div>
 
           </div>
 
-        </div>
+          <button
+            onClick={
+              handlePayment
+            }
+            className="w-full mt-12 bg-yellow-400 text-black p-5 rounded-2xl text-2xl font-bold hover:scale-105 transition-all duration-300"
+          >
 
-      </section>
+            Buy Premium Now 🚀
 
-      {/* PREMIUM TESTS */}
-
-      <section className="mt-20">
-
-        <h2 className="text-4xl font-bold text-center">
-
-          Premium Mock Tests
-
-        </h2>
-
-        <div className="grid md:grid-cols-2 gap-8 mt-12">
-
-          {premiumTests.map(
-            (
-              test,
-              index
-            ) => (
-
-              <div
-                key={index}
-                className={
-                  darkMode
-                    ? "bg-gray-900 rounded-3xl p-8 shadow-xl"
-                    : "bg-white rounded-3xl p-8 shadow-xl"
-                }
-              >
-
-                <div className="flex justify-between items-center">
-
-                  <h3 className="text-2xl font-bold">
-
-                    {test.title}
-
-                  </h3>
-
-                  <div className="bg-red-500 text-white px-4 py-2 rounded-full font-bold">
-
-                    🔒 Locked
-
-                  </div>
-
-                </div>
-
-                <div className="mt-8 space-y-4 text-lg">
-
-                  <p>
-                    📘 Questions:
-                    {" "}
-                    {test.questions}
-                  </p>
-
-                  <p>
-                    ⏰ Duration:
-                    {" "}
-                    {test.duration}
-                  </p>
-
-                  <p>
-                    📊 Full SSC Pattern
-                  </p>
-
-                </div>
-
-                <button className="w-full mt-10 bg-yellow-400 text-black py-4 rounded-2xl font-bold text-lg hover:scale-105 transition-all duration-300">
-
-                  Unlock Premium
-
-                </button>
-
-              </div>
-
-            )
-          )}
+          </button>
 
         </div>
 
-      </section>
+      </div>
 
     </main>
 

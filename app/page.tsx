@@ -17,6 +17,26 @@ export default function Home() {
       }
     >
 
+      {/* TOP BUTTONS */}
+
+      <div className="flex justify-end gap-4 p-6 flex-wrap">
+
+        <a
+          href="/admin"
+          className="bg-red-500 text-white px-4 py-2 rounded-xl font-bold"
+        >
+          Admin
+        </a>
+
+        <a
+          href="/dashboard"
+          className="bg-blue-700 text-white px-4 py-2 rounded-xl font-bold"
+        >
+          Dashboard
+        </a>
+
+      </div>
+
       {/* HERO */}
 
       <section className="p-10 text-center">

@@ -6,6 +6,10 @@ import {
 } from "react";
 
 import {
+  checkPremium,
+} from "@/firebase/premium";
+
+import {
   useTheme,
 } from "@/context/ThemeContext";
 
@@ -61,6 +65,10 @@ export default function TestsPage() {
     setTimeLeft] =
     useState(1800);
 
+  const [isPremium,
+  setIsPremium] =
+  useState(false);
+
   /* LOAD QUESTIONS */
 
   useEffect(() => {
@@ -72,6 +80,18 @@ export default function TestsPage() {
 
       setLoading(true);
 
+      if (user?.email) {
+
+  const premiumStatus =
+    await checkPremium(
+      user.email
+    );
+
+  setIsPremium(
+    premiumStatus
+  );
+
+}
       const data =
         await getQuestions();
 
@@ -370,6 +390,55 @@ export default function TestsPage() {
             </h2>
 
           </button>
+          <button
+  onClick={() => {
+
+    if (!isPremium) {
+
+      alert(
+        "Buy Premium Plan First 🚀"
+      );
+
+      window.location.href =
+        "/premium";
+
+      return;
+
+    }
+
+    setSelectedSubject(
+      "Premium Mock"
+    );
+
+  }}
+  className="bg-black text-white p-10 rounded-3xl shadow-xl border-4 border-yellow-400 relative"
+>
+
+  <div className="absolute top-4 right-4 bg-yellow-400 text-black px-3 py-1 rounded-full font-bold text-sm">
+
+    PREMIUM
+
+  </div>
+
+  <div className="text-6xl">
+
+    👑
+
+  </div>
+
+  <h2 className="text-3xl font-bold mt-6">
+
+    Premium Full Mock
+
+  </h2>
+
+  <p className="mt-4 text-gray-300">
+
+    Unlock advanced SSC mocks
+
+  </p>
+
+</button>
 
         </div>
 
