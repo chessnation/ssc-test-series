@@ -5,6 +5,10 @@ import {
   useState,
 } from "react";
 
+import {
+  useAuth,
+} from "@/context/AuthContext";
+
 import { useTheme } from "@/context/ThemeContext";
 
 import {
@@ -17,6 +21,9 @@ export default function AdminPage() {
 
   const { darkMode } =
     useTheme();
+
+  const { user } =
+  useAuth();
 
   const [question,
     setQuestion] =
@@ -57,6 +64,9 @@ export default function AdminPage() {
   const [questions,
     setQuestions] =
     useState<any[]>([]);
+
+  const ADMIN_EMAIL =
+  "chessnation1@gmail.com";
 
   useEffect(() => {
 
@@ -170,6 +180,37 @@ export default function AdminPage() {
 
   }
 
+  if (
+  !user ||
+  user.email !==
+    ADMIN_EMAIL
+) {
+
+  return (
+
+    <main className="min-h-screen flex items-center justify-center bg-black text-white p-6">
+
+      <div className="bg-red-500 p-10 rounded-3xl text-center max-w-xl">
+
+        <h1 className="text-5xl font-bold">
+
+          Access Denied
+
+        </h1>
+
+        <p className="mt-6 text-xl">
+
+          Only admin can access this page.
+
+        </p>
+
+      </div>
+
+    </main>
+
+  );
+
+}
   return (
 
     <main
